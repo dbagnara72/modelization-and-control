@@ -1,0 +1,5 @@
+Hand rotations
+
+scope 0: phase to star point with 1 kohm star load
+scope 1: phase to star point with 1 kohm star load
+scope 2: phase to phase with 1 kohm star load
