@@ -19,16 +19,20 @@ torque_1_temp = [200 400 600 800 1000 1167 1300 1500 1665 ...
     1700 1900 2100 2300 2500 2700 2900 3100 3300];
 consumption_1_temp = [544.9	362.7	304.6	279.2	268.2 ...
     262.3 268 280 304 324 345 420 540 620 850 1090 1540 2580];
-f=fit(torque_1_temp',consumption_1_temp','spline');
+f1=fit(torque_1_temp',consumption_1_temp','smoothingspline');
+f2=fit(torque_1_temp',consumption_1_temp','spline');
 
-consumption_1 = f(torque_reference);
+consumption_1 = f1(torque_reference');
+consumption_2 = f2(torque_reference');
 
-% figure; 
-% plot(torque_1_data, consumption_1_data); grid on
-% hold on
-% plot(torque_reference, consumption_1); grid on
-% hold off
-% set(gca,'xlim',[0 3500]);
+figure; 
+plot(torque_1_data, consumption_1_data); grid on
+hold on
+plot(torque_reference, consumption_1); grid on
+hold on
+plot(torque_reference, consumption_2); grid on
+hold off
+set(gca,'xlim',[0 3500]);
 
 %% data2
 rpm_2_data = [2000 2000 2000 2000 2000 2000 2000 2000 ...

@@ -1,7 +1,7 @@
 clear all
 close all
 clc
-
+beep off
 
 
 %% utility data for simulation
