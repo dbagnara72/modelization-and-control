@@ -59,6 +59,7 @@ dkms.conf
 
 # enviroment
 .venv
+.vscode
 
 # MATLAB and Simulink
 Simulink/**/slprj
