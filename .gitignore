@@ -69,7 +69,6 @@ Simulink/**/slprj
 *.mexw32
 *.mexw64
 *.p
-*.mdl
 *.mat
 *.mex
 *.bak
@@ -94,9 +93,7 @@ Simulink/**/slprj
 *.slddrw
 *.sldrt
 *.sltx
-*.ssc
 *.ssm
-*.mlx
 *.nbp
 *.pbl
 *.opv
