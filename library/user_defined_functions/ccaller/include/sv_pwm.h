@@ -13,8 +13,8 @@
 typedef struct sv_pwm_s 
 {
 	float	ts;
-	float	ua;
-	float 	ub;
+	float	ua; /* u_alpha */
+	float 	ub; /* u_beta */
 	float	du;
 	float	dv;
 	float	dw;
