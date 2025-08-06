@@ -1,7 +1,7 @@
 #ifndef _SVCM_PWM_
 #define _SVCM_PWM_
 
-#include <svcm_pwm.h>
+#include <math_f.h>
 
 #define MATH_2_SQRT3				1.15470053837925
 #define MATH_1_2PI					0.15915494309189

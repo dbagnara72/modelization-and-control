@@ -1,12 +1,14 @@
+/* space vector modulation with zero voltage (or common mode) */
+
 #include <svcm_pwm.h>
 
 void svcm_pwm_process(SVCMPWM *c)
 {
 	float ref_a, ref_b, t1, t2, t0;
 	unsigned int pwm_sector;
-	
 	const float tbpwm = 1.0F;
 
+/* switch enable */
 	if (c->enable)
 	{
 		if (c->ua >= 0)
