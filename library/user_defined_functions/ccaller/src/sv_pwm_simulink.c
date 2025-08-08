@@ -3,22 +3,22 @@
 #include <sv_pwm.h>
 
 // ------------------------------------------------------------------------------
-SV_PWM_OUTPUT sv_pwm_process_simulink(const float ua, const float ub, const float ts, 
+SV_PWM_OUTPUT sv_pwm_process_simulink(const float ualpha, const float ubeta, const float ts,
 					unsigned int enable)
 {
 	static SVPWM ctrl = {0};
 
-	ctrl.ua = ua;
-	ctrl.ub = ub;
+	ctrl.ualpha = ualpha;
+	ctrl.ubeta = ubeta;
 	ctrl.ts = ts;
 	ctrl.enable = enable;
 
     sv_pwm_process(&ctrl);
 
 	const SV_PWM_OUTPUT ctrl_out = {
-		.m_u = ctrl.du,
-		.m_v = ctrl.dv,
-		.m_w = ctrl.dw
+		.da = ctrl.da,
+		.db = ctrl.db,
+		.dc = ctrl.dc
 	};
 	return ctrl_out;
 }

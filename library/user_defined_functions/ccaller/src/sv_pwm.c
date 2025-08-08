@@ -4,166 +4,82 @@
 
 void sv_pwm_process(SVPWM *c)
 {
-	float ref_a, ref_b, t1, t2, t0;
-	unsigned int pwm_sector;
+	float t1 = MATH_NULL;
+	float t2 = MATH_NULL;
+	float t0 = MATH_NULL;
+	float angle = MATH_NULL;
 	
-	const float tbpwm = 1.0F;
+	const float tbpwm = MATH_1;
 
 	if (c->enable)
 	{
-		if (c->ua >= 0)
-			ref_a = c->ua * MATH_SQRT3_2;
-		else
-			ref_a = c->ua * -MATH_SQRT3_2;
+    	angle = atan2f(c->ubeta,c->ualpha);
 
-		if (c->ub >= 0)
-			ref_b = c->ub * 0.5;
-		else
-			ref_b = c->ub * -0.5;
-
-		if (ref_a >= ref_b)
-		{
-			if (c->ua >= 0)
-			{
-				if (c->ub >= 0) 
-				{
-					pwm_sector = 0;
-					t2 = c->ub * MATH_2_SQRT3;
-					t1 = c->ua - c->ub * MATH_1_SQRT3;
-					t0 = 1.0 - t2 - t1;
-
-					if (t0 > 0) 
-					{
-						c->du = (t0 * tbpwm * 0.5); 		                   
-						c->dv = (t1 * tbpwm) + c->du;
-						c->dw = (t2 * tbpwm) + c->dv;
-					}
-					else 
-					{
-						t1 = t1 / (t1 + t2);
-						c->du = 0;
-						c->dv = (t1 * tbpwm);
-						c->dw = tbpwm + 2 * c->ts;
-					}
-				}
-				else 
-				{
-					pwm_sector = 5;
-					t1 = c->ua + c->ub * MATH_1_SQRT3;
-					t2 = (c->ua - t1) * 0.5 - c->ub * MATH_SQRT3_2;
-					t0 = 1.0 - t2 - t1;
-
-					if (t0 > 0) 
-					{
-						c->du = (t0 * 0.5);
-						c->dw = (t1 * tbpwm) + c->du;
-						c->dv = (t2 * tbpwm) + c->dw;
-					}
-					else 
-					{
-						t1 = t1 / (t1 + t2);
-						c->du = 0;
-						c->dw = (t1 * tbpwm);
-						c->dv = tbpwm + 2 * c->ts;
-					}
-				}
-			}
-			else {
-				if (c->ub >= 0) 
-				{
-					pwm_sector = 2;
-					t2 = c->ub * -MATH_1_SQRT3 - c->ua;
-					t1 = c->ub * MATH_SQRT3_2 - (c->ua + t2) * 0.5;
-					t0 = 1.0 - t2 - t1;
-
-					if (t0 > 0) 
-					{
-						c->dv = (t0 * tbpwm * 0.5);
-						c->dw = (t1 * tbpwm) + c->dv;
-						c->du = (t2 * tbpwm) + c->dw;
-					}
-					else 
-					{
-						t1 = t1 / (t1 + t2);
-						c->dv = 0;
-						c->dw = (t1 * tbpwm);
-						c->du = tbpwm + 2 * c->ts;
-					}
-				}
-				else 
-				{
-					pwm_sector = 3;
-					t1 = c->ub * -MATH_2_SQRT3;
-					t2 = c->ub * MATH_1_SQRT3 - c->ua;
-					t0 = 1.0 - t2 - t1;
-
-					if (t0 > 0) 
-					{
-						c->dw = (t0 * tbpwm * 0.5);
-						c->dv = (t1 * tbpwm) + c->dw;
-						c->du = (t2 * tbpwm) + c->dv;
-					}
-					else 
-					{
-						t1 = t1 / (t1 + t2);
-						c->dw = 0;
-						c->dv = (t1 * tbpwm);
-						c->du = tbpwm + 2 * c->ts;
-					}
-				}
-			}
+	    if ((angle >= MATH_NULL) && (angle <= MATH_PI_3)) {
+	    	/* sector1 (counterclockwise) */
+	    	t2 = c->ubeta * MATH_2_SQRT3; // v2
+			t1 = c->ualpha - c->ubeta * MATH_1_SQRT3; // v1
+			t0 = MATH_1 - t2 - t1;
+	    	c->da = t0 * tbpwm * MATH_HALF;
+	    	c->db = t1 * tbpwm + c->da;
+	    	c->dc = t2 * tbpwm + c->db;
 		}
-		else 
-		{
-			if (c->ub >= 0) 
-			{
-				pwm_sector = 1;
-				t1 = c->ub * MATH_1_SQRT3 - c->ua;
-				t2 = (c->ua - t1) * 0.5 + c->ub * MATH_SQRT3_2;
-				t0 = 1.0 - t2 - t1;
 
-				if (t0 > 0) 
-				{
-					c->dv = (t0 * tbpwm * 0.5);
-					c->du = (t1 * tbpwm) + c->dv;
-					c->dw = (t2 * tbpwm) + c->du;
-				}
-				else 
-				{
-					t1 = t1 / (t1 + t2);
-					c->dv = 0;
-					c->du = (t1 * tbpwm);
-					c->dw = tbpwm + 2 * c->ts;
-				}
-			}
-			else 
-			{
-				pwm_sector = 4;
-				t2 = c->ua - c->ub * MATH_1_SQRT3;
-				t1 = (c->ua + t2) * -0.5 - c->ub * MATH_SQRT3_2;
-				t0 = 1.0 - t2 - t1;
+	    if ((angle >= MATH_PI_3) && (angle <= MATH_2PI_3)) {
+	        /* sector2 (clockwise) */
+	        t1 = -c->ualpha + c->ubeta * MATH_1_SQRT3; // v3
+	        t2 = c->ualpha + c->ubeta * MATH_1_SQRT3; // v2
+	        t0 = MATH_1 - t2 - t1;
+	        c->db = t0 * tbpwm * MATH_HALF;
+	        c->da = t1 * tbpwm + c->db;
+	        c->dc = t2 * tbpwm + c->da;
+	    }
 
-				if (t0 > 0) 
-				{
-					c->dw = (t0 * tbpwm * 0.5);
-					c->du = (t1 * tbpwm) + c->dw;
-					c->dv = (t2 * tbpwm) + c->du;
-				}
-				else 
-				{
-					t1 = t1 / (t1 + t2);
-					c->dw = 0;
-					c->du = (t1 * tbpwm);
-					c->dv = tbpwm + 2 * c->ts;
-				}
-			}
-		}
+	    if ((angle >= MATH_2PI_3) && (angle <= MATH_PI)) {
+	        /* sector3 (counterclockwise) */
+	        t2 = -c->ubeta * MATH_1_SQRT3 - c->ualpha; // v4
+	        t1 = c->ubeta * MATH_2_SQRT3; //v3
+	        t0 = MATH_1 - t2 - t1;
+	        c->db = t0 * tbpwm * MATH_HALF;
+	        c->dc = t1 * tbpwm + c->db;
+	        c->da = t2 * tbpwm + c->dc;
+	    }
+
+	    if ((angle >= -MATH_PI) && (angle <= -MATH_2PI_3)) {
+	        /* sector4 (clockwise) */
+	        t1 = -MATH_2_SQRT3 * c->ubeta; //v5
+	        t2 = c->ubeta * MATH_1_SQRT3 - c->ualpha; //v4
+	        t0 = MATH_1 - t2 - t1;
+	        c->dc = t0 * tbpwm * MATH_HALF;
+	        c->db = t1 * tbpwm + c->dc;
+	        c->da = t2 * tbpwm + c->db;
+	    }
+
+	    if ((angle >= -MATH_2PI_3) && (angle <= -MATH_PI_3)) {
+	        /* sector5 (counterclockwise) */
+	        t2 = c->ualpha - c->ubeta * MATH_1_SQRT3; // v6
+	        t1 = -c->ualpha - c->ubeta * MATH_1_SQRT3; // v5
+	        t0 = MATH_1 - t2 - t1;
+	        c->dc = t0 * tbpwm * MATH_HALF;
+	        c->da = t1 * tbpwm + c->dc;
+	        c->db = t2 * tbpwm + c->da;
+	    }
+
+	    if ((angle >= -MATH_PI_3) && (angle <= MATH_NULL)) {
+	        /* sector6 (clockwise) */
+	        t1 = c->ualpha + c->ubeta * MATH_1_SQRT3; // v1
+	        t2 = -c->ubeta * MATH_2_SQRT3; // v6
+	        t0 = MATH_1 - t2 - t1;
+	        c->da = t0 * tbpwm * MATH_HALF;
+	        c->dc = t1 * tbpwm + c->da;
+	        c->db = t2 * tbpwm + c->dc;
+	    }
 	}
 	else
 	{
-		c->du = 0.5; 		                   
-		c->dv = 0.5;
-		c->dw = 0.5;
+		c->da = MATH_HALF * tbpwm;
+		c->db = MATH_HALF * tbpwm;
+		c->dc = MATH_HALF * tbpwm;
 	}
 
 }
