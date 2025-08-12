@@ -1,6 +1,7 @@
 close all
 clear all
 clc
+beep off
 
 opts = bodeoptions('cstprefs');
 opts.FreqUnits = 'Hz';
@@ -9,8 +10,7 @@ opts.FreqUnits = 'Hz';
 s=tf('s');
 fPWM_RECT = 5e3; % PWM frequency 
 tPWM_RECT = 1/fPWM_RECT;
-fclock=25e6;
-Tcontrol_rect=tPWM_RECT; % Sampling time of the control 
+Tcontrol_rect = tPWM_RECT; % Sampling time of the control 
 z_rect=tf('z',Tcontrol_rect);
 
 %% Main Parameter for Simulation
@@ -26,10 +26,10 @@ V_FS = Vout_dc_nom * margin_factor;
 
 %% Simulation data sampling time
 simlength = 5;
-Tc=1e-5;
-Ts=Tc/1;
+tc=1e-6;
+ts=tc/1;
 t_misura=simlength;
-Nc=ceil(t_misura/Tc);
+Nc=ceil(t_misura/tc);
 
 %% HW components
 % Trafo
@@ -75,7 +75,7 @@ Cdf7 = 1/Ldf7/(2*pi*350)^2;
 RCdf7 = 0.025;
 
 % carico uscita
-Rload = 1.2/4; % valore da usare per carico inverter
+Rload = 1.2; % valore da usare per carico inverter
 Lload = 250e-4;
 
 %% grid pll
@@ -107,11 +107,11 @@ lpf = (wn^2/(s^2+2*wn*s+wn^2));
 lpf_ss = ss(A,B,C,D);
 lpf_ss_init = [0,50/lpf_ss.c(2)];
 
-% %% 
-% model = 'SCRrectifier_12p_2020_12_24v_ssc';
-% open_system(model)
-% Simulink.importExternalCTypes(model,'Names',{'twvpr_py_t'});
-% Simulink.importExternalCTypes(model,'Names',{'twvpr_pd_t'});
+%% 
+model = 'dconv_thyb';
+open_system(model)
+Simulink.importExternalCTypes(model,'Names',{'twvpr_py_t'});
+Simulink.importExternalCTypes(model,'Names',{'twvpr_pd_t'});
 
 
 
