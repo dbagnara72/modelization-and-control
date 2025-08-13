@@ -1,7 +1,7 @@
-/* Twelve pulses rectifier */
+/* Dual six pulses rectifier */
 
-#ifndef _TWVPRCTRL_
-#define _TWVPRCTRL_
+#ifndef _DSPRCTRL_
+#define _DSPRCTRL_
 
 #define MATH_PI_6		0.523598775598299
 #define MATH_PI_3		1.0471975511966
@@ -14,7 +14,7 @@
 #define PWIDTH			110
 
 
-typedef struct twvprctrl_s {
+typedef struct dspr_ctrl_s {
     float ramp_d_1;
     float ramp_d_2;
     float ramp_d_3;
@@ -64,30 +64,30 @@ typedef struct twvprctrl_s {
 	int synch_y4;
 	int synch_y5;
 	int synch_y6;
-} twvprctrl_t;
-#define TWVPRCTRL twvprctrl_t
+} dspr_ctrl_t;
+#define DSPRCTRL dspr_ctrl_t
 
-typedef struct twvpr_pd_s {
-	int pd_1;
-	int pd_2;
-	int pd_3;
-	int pd_4;
-	int pd_5;
-	int pd_6;
-}  twvpr_pd_t;
-#define TWVPR_PD twvpr_pd_t
+typedef struct dspr_pd_pos_s {
+	int pd_pos_1;
+	int pd_pos_2;
+	int pd_pos_3;
+	int pd_pos_4;
+	int pd_pos_5;
+	int pd_pos_6;
+}  dspr_pd_pos_t;
+#define DSPR_PD_POS dspr_pd_pos_t
 
-typedef struct twvpr_py_s {
-	int py_1;
-	int py_2;
-	int py_3;
-	int py_4;
-	int py_5;
-	int py_6;
-} twvpr_py_t;
-#define TWVPR_PY twvpr_py_t
+typedef struct dspr_pd_neg_s {
+	int pd_neg_1;
+	int pd_neg_2;
+	int pd_neg_3;
+	int pd_neg_4;
+	int pd_neg_5;
+	int pd_neg_6;
+}  dspr_pd_neg_t;
+#define DSPR_PD_NEG dspr_pd_neg_t
 
-float twvprProcess(TWVPRCTRL *twvpr, float wt, float alpha, int block, TWVPR_PY *py, TWVPR_PD *pd);
+float dsprProcess(DSPRCTRL *dspr, float wt, float alpha, int block, DSPR_PD_POS *pd_pos, DSPR_PD_NEG *pd_neg);
 
 void twvprProcessSimulink(float wt, float alpha, int block, TWVPR_PY *py, TWVPR_PD *pd);
 

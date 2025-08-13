@@ -26,7 +26,7 @@ V_FS = Vout_dc_nom * margin_factor;
 
 %% Simulation data sampling time
 simlength = 5;
-tc=1e-6;
+tc=1e-5;
 ts=tc/1;
 t_misura=simlength;
 Nc=ceil(t_misura/tc);
@@ -75,7 +75,7 @@ Cdf7 = 1/Ldf7/(2*pi*350)^2;
 RCdf7 = 0.025;
 
 % carico uscita
-Rload = 1.2; % valore da usare per carico inverter
+Rload = 2; % valore da usare per carico inverter
 Lload = 250e-4;
 
 %% grid pll

@@ -1,6 +1,6 @@
-/* Twelve pulses rectifier */
+/* Dual six pulses rectifier */
 
-#include "../include/twelve_pulse_rect.h"
+#include "../include/dual_six_pulses_rect.h"
 
 // ------------------------------------------------------------------------------
 float twvprProcess(TWVPRCTRL *twvpr, float wt, float alpha, int block, TWVPR_PY *py, TWVPR_PD *pd)
