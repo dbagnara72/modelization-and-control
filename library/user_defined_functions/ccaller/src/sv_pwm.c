@@ -35,7 +35,7 @@ void sv_pwm_process(SVPWM *c)
 
 		}
 
-	    if ((angle >= MATH_PI_3) && (angle <= MATH_2PI_3)) {
+	    else if ((angle >= MATH_PI_3) && (angle <= MATH_2PI_3)) {
 	        /* sector2 (clockwise) */
 	        t1 = -c->ualpha + c->ubeta * MATH_1_SQRT3; // v3
 	        t2 = c->ualpha + c->ubeta * MATH_1_SQRT3; // v2
@@ -54,7 +54,7 @@ void sv_pwm_process(SVPWM *c)
 			}
 	    }
 
-	    if ((angle >= MATH_2PI_3) && (angle <= MATH_PI)) {
+	    else if ((angle >= MATH_2PI_3) && (angle <= MATH_PI)) {
 	        /* sector3 (counterclockwise) */
 	        t2 = -c->ubeta * MATH_1_SQRT3 - c->ualpha; // v4
 	        t1 = c->ubeta * MATH_2_SQRT3; //v3
@@ -73,7 +73,7 @@ void sv_pwm_process(SVPWM *c)
 			}
 	    }
 
-	    if ((angle >= -MATH_PI) && (angle <= -MATH_2PI_3)) {
+	    else if ((angle >= -MATH_PI) && (angle <= -MATH_2PI_3)) {
 	        /* sector4 (clockwise) */
 	        t1 = -MATH_2_SQRT3 * c->ubeta; //v5
 	        t2 = c->ubeta * MATH_1_SQRT3 - c->ualpha; //v4
@@ -92,7 +92,7 @@ void sv_pwm_process(SVPWM *c)
 			}
 	    }
 
-	    if ((angle >= -MATH_2PI_3) && (angle <= -MATH_PI_3)) {
+	    else if ((angle >= -MATH_2PI_3) && (angle <= -MATH_PI_3)) {
 	        /* sector5 (counterclockwise) */
 	        t2 = c->ualpha - c->ubeta * MATH_1_SQRT3; // v6
 	        t1 = -c->ualpha - c->ubeta * MATH_1_SQRT3; // v5
@@ -111,7 +111,8 @@ void sv_pwm_process(SVPWM *c)
 			}
 	    }
 
-	    if ((angle >= -MATH_PI_3) && (angle <= MATH_NULL)) {
+	    /* else ((angle >= -MATH_PI_3) && (angle <= MATH_NULL)) { */
+	    else  {
 	        /* sector6 (clockwise) */
 	        t1 = c->ualpha + c->ubeta * MATH_1_SQRT3; // v1
 	        t2 = -c->ubeta * MATH_2_SQRT3; // v6
