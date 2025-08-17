@@ -11,7 +11,7 @@
 #define MATH_1_2		0.5
 #define MATH_SQRT3_2	0.866025403784439
 #define MATH_RAD_DEG	57.2957795130823
-#define PWIDTH			80
+#define PWIDTH			110
 
 
 typedef struct twvprctrl_s {
