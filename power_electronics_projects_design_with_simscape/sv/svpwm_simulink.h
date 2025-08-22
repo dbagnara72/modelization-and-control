@@ -1,7 +1,7 @@
-#ifndef _SV_PWM_SIMULINK_
-#define _SV_PWM_SIMULINK_
+#ifndef _SVPWM_SIMULINK_
+#define _SVPWM_SIMULINK_
 
-typedef struct sv_pwm_output_s {
+typedef struct svpwm_output_s {
 	float	da;
 	float	db;
 	float	dc;

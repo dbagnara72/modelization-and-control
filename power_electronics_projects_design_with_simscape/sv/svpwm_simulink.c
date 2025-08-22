@@ -1,9 +1,9 @@
 
-#include <sv_pwm_simulink.h>
-#include <sv_pwm.h>
+#include <svpwm_simulink.h>
+#include <svpwm.h>
 
 // ------------------------------------------------------------------------------
-SV_PWM_OUTPUT sv_pwm_process_simulink(const float ualpha, const float ubeta, const float ts,
+SVPWM_OUTPUT svpwm_process_simulink(const float ualpha, const float ubeta, const float ts,
 					unsigned int enable)
 {
 	static SVPWM ctrl = {0};
@@ -13,9 +13,9 @@ SV_PWM_OUTPUT sv_pwm_process_simulink(const float ualpha, const float ubeta, con
 	ctrl.ts = ts;
 	ctrl.enable = enable;
 
-    sv_pwm_process(&ctrl);
+    svpwm_process(&ctrl);
 
-	const SV_PWM_OUTPUT ctrl_out = {
+	const SVPWM_OUTPUT ctrl_out = {
 		.da = ctrl.da,
 		.db = ctrl.db,
 		.dc = ctrl.dc
