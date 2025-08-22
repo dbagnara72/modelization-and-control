@@ -1,25 +1,25 @@
-Rockwell EQN3691B 450kW 
+SICME SN315X4 440kW 
 Values with label "bez" mean always peak 
 Ubez means voltage peak phase 
  
-Inom =  661.00000000 A 
-Vnom =  460.00000000 V 
-Ibez =  934.79516473 A 
-Ubez =  375.58842723 V 
-rpm =  1200.00000000 rpm 
-freq_nom =  60.00000000 Hz 
-rpm_load =  1197.00000000 rpm 
-polepairs =  3.00000000  
-Rs =  0.00182000 Ohm 
-Ls =  0.00311715 H 
-Rr =  0.00111020 Ohm 
-Lr =  0.00311715 H 
-Lm =  0.00303392 H 
-Im =  226.00000000 A 
-Im_bez =  319.61226510 A 
-Torque =  3552.37391594 kNm 
-cosphi =  0.88300000  
-eff =  0.96000000  
-ucc =  71.89189189 V 
-icc =  661.00000000 A 
-fcc =  60.00000000 Hz 
+Inom =  793.00000000 A 
+Vnom =  440.00000000 V 
+Ibez =  1121.47135496 A 
+Ubez =  359.25849561 V 
+rpm =  1020.00000000 rpm 
+freq_nom =  34.00000000 Hz 
+rpm_load =  1008.00000000 rpm 
+polepairs =  2.00000000  
+Rs =  0.00300000 Ohm 
+Ls =  0.00386085 H 
+Rr =  0.00420000 Ohm 
+Lr =  0.00386085 H 
+Lm =  0.00374767 H 
+Im =  308.00000000 A 
+Im_bez =  435.57777721 A 
+Torque =  4659.23359357 kNm 
+cosphi =  0.84000000  
+eff =  0.94400000  
+ucc =  440.00000000 V 
+icc =  3568.50000000 A 
+fcc =  50.00000000 Hz 

@@ -7,7 +7,7 @@ options.FreqUnits = 'Hz';
 beep off
 
 %% pwm
-fPWM_INV = 30e3;
+fPWM_INV = 25e3;
 dead_time_INV = 0.42e-6;
 dead_time = dead_time_INV;
 delayINV_modA = 0;
@@ -17,11 +17,8 @@ pwm_out_lim = 1;
 use_cc_ccaller = 1;
 use_cc_simulink = 1 - use_cc_ccaller;
 
-use_observer_with_load_estimator_ccaller = 0;
+use_observer_with_load_estimator_ccaller = 1;
 use_observer_ccaller = 0;
-use_observer_with_load_estimator_reduced_ccaller = 0;
-use_observer_reduced_ccaller = 1;
-
 use_observer_simulink = 0;
 
 use_gyro_model = 0;
@@ -198,7 +195,7 @@ kp_fw = 0.5;
 ki_fw = 1.8;
 
 %% Back EMF model
-emf_fb_p = 0.6;
+emf_fb_p = 0.2;
 emf_p = emf_fb_p*4/10;
 
 emf_fb_p_ccaller_1 = emf_fb_p;
@@ -289,15 +286,14 @@ grid on
 
 
 %% C-Caller
-open_system('fb_powertrain_model');
-Simulink.importExternalCTypes('fb_powertrain_model','Names',{'mavgflt_output_t'});
-Simulink.importExternalCTypes('fb_powertrain_model','Names',{'bemf_obsv_output_t'});
-Simulink.importExternalCTypes('fb_powertrain_model','Names',{'bemf_obsv_redu_output_t'});
-Simulink.importExternalCTypes('fb_powertrain_model','Names',{'bemf_obsv_load_est_output_t'});
-Simulink.importExternalCTypes('fb_powertrain_model','Names',{'bemf_obsv_load_est_redu_output_t'});
-Simulink.importExternalCTypes('fb_powertrain_model','Names',{'dqvector_pi_output_t'});
-Simulink.importExternalCTypes('fb_powertrain_model','Names',{'sv_pwm_output_t'});
-Simulink.importExternalCTypes('fb_powertrain_model','Names',{'global_state_machine_output_t'});
+name = 'powertrain_model';
+open_system(name);
+Simulink.importExternalCTypes(name,'Names',{'mavgflt_output_t'});
+Simulink.importExternalCTypes(name,'Names',{'bemf_obsv_output_t'});
+Simulink.importExternalCTypes(name,'Names',{'bemf_obsv_load_est_output_t'});
+Simulink.importExternalCTypes(name,'Names',{'dqvector_pi_output_t'});
+Simulink.importExternalCTypes(name,'Names',{'sv_pwm_output_t'});
+Simulink.importExternalCTypes(name,'Names',{'global_state_machine_output_t'});
 
 
 
