@@ -26,7 +26,7 @@ void first_harmonic_tracker_ts(volatile FIRST_HARMONIC_TRACKER *f, volatile floa
 	f->ts = ts;
 }
 
-float first_harmonic_tracker_process(volatile FIRST_HARMONIC_TRACKER *f, volatile float u)
+float first_harmonic_tracker_process(volatile FIRST_HARMONIC_TRACKER *f, const float u)
 {
 	const float first_harmonic_tracker_ld1 = f->first_harmonic_tracker_l1 * f->ts;
 	const float first_harmonic_tracker_ld2 = f->first_harmonic_tracker_l2 * f->ts;

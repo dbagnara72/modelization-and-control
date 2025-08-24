@@ -4,7 +4,7 @@
 //#include <math.h>
 #include <math_f.h>
 
-
+/*
 #define FIRST_HARMONIC_TRACKER_L1 		157.08f
 #define FIRST_HARMONIC_TRACKER_L2		-94748.2f
 #define FIRST_HARMONIC_TRACKER_A11		0.0f
@@ -12,8 +12,8 @@
 #define FIRST_HARMONIC_TRACKER_A21		-98696.0f
 #define FIRST_HARMONIC_TRACKER_A22		0.0f
 #define FIRST_HARMONIC_TRACKER_C1		1.0f
+*/
 
-/*
 #define FIRST_HARMONIC_TRACKER_L1 		282.743f
 #define FIRST_HARMONIC_TRACKER_L2		-91787.3f
 #define FIRST_HARMONIC_TRACKER_A11		0.0f
@@ -21,7 +21,7 @@
 #define FIRST_HARMONIC_TRACKER_A21		-98696.0f
 #define FIRST_HARMONIC_TRACKER_A22		-31.41592f
 #define FIRST_HARMONIC_TRACKER_C1		1.0f
-*/
+
 
 typedef struct first_harmonic_tracker_s {
 	float			ts;		    						/* sampling time */
@@ -45,6 +45,6 @@ void first_harmonic_tracker_reset(volatile FIRST_HARMONIC_TRACKER *f);
 
 void first_harmonic_tracker_ts(volatile FIRST_HARMONIC_TRACKER *f, volatile float ts);
 
-float first_harmonic_tracker_process(volatile FIRST_HARMONIC_TRACKER *f, volatile float u);
+float first_harmonic_tracker_process(volatile FIRST_HARMONIC_TRACKER *f, const float u);
 
 #endif

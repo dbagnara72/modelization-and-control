@@ -3,7 +3,7 @@
 #include "../include/twelve_pulse_rect.h"
 
 // ------------------------------------------------------------------------------
-float twvprProcess(TWVPRCTRL *twvpr, float wt, float alpha, int block, TWVPR_PY *py, TWVPR_PD *pd)
+float twvprProcess(TWVPRCTRL *twvpr, const float wt, const float alpha, const int block, TWVPR_PY *py, TWVPR_PD *pd)
 {
 	float phaseshift = 0;
 	
@@ -309,7 +309,7 @@ float twvprProcess(TWVPRCTRL *twvpr, float wt, float alpha, int block, TWVPR_PY 
 	
 }
 
-void twvprProcessSimulink(float wt, float alpha, int block, TWVPR_PY *py, TWVPR_PD *pd)
+void twvprProcessSimulink(const float wt, const float alpha, const int block, TWVPR_PY *py, TWVPR_PD *pd)
 {
 	static TWVPRCTRL twvpr_inst; 
 	static TWVPR_PY py_inst; 
