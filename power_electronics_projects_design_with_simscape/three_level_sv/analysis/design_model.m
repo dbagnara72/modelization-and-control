@@ -7,7 +7,7 @@ opts = bodeoptions('cstprefs');
 opts.FreqUnits = 'Hz';
 
 %% pwm
-fPWM_INV = 35e3; % PWM frequency 
+fPWM_INV = 5e3; % PWM frequency 
 tPWM_INV = 1/fPWM_INV;
 fPWM_ZVS = fPWM_INV; % PWM frequency 
 tPWM_ZVS = 1/fPWM_ZVS;
@@ -46,8 +46,8 @@ ctrl_i_lim_up = Iout_dc_nom/I_FS;
 ctrl_i_lim_down = 0;
 
 %% Simulation data sampling time
-simlength = 3;
-tc = ts_inv/200;
+simlength = 1;
+tc = ts_inv/100;
 ts_sim = tc;
 time_fault=1.5e3;
 t_misura=simlength/5;
@@ -171,7 +171,7 @@ freq = 50;
 delta = 0.02;
 res = 10^(22/20) * s/(s^2 + 4*delta*pi*freq*s + (2*pi*freq)^2);
 resd_tf = c2d(res,ts_inv);
-figure; bode(res,opts); grid on
+% figure; bode(res,opts); grid on
 
 [resn, resd]=tfdata(res,'v');
 [Ares,Bres,Cres,Dres] = tf2ss(resn,resd);
@@ -225,7 +225,7 @@ g1_4Hz = 1 - g0_4Hz;
 
 flt_dq = 2/(s/(2*pi*50)+1)^2;
 flt_dq_d = c2d(flt_dq,ts_inv);
-figure; bode(flt_dq_d); grid on
+% figure; bode(flt_dq_d); grid on
 [num50 den50]=tfdata(flt_dq_d,'v');
 
 
@@ -272,12 +272,12 @@ rKalman = 1;
 Zmodel = (0:1e-3:1);
 ocv_model = E_1*exp(-Zmodel*alpha) + E0 + E1*Zmodel + E2*Zmodel.^2 +...
     E3*Zmodel.^3 + Elog*log(1-Zmodel+ts_inv);
-figure; 
-plot(Zmodel,ocv_model,'LineWidth',2);
-xlabel('state of charge [p.u.]');
-ylabel('open circuit voltage [V]');
-title('open circuit voltage(state of charge)');
-grid on
+% figure; 
+% plot(Zmodel,ocv_model,'LineWidth',2);
+% xlabel('state of charge [p.u.]');
+% ylabel('open circuit voltage [V]');
+% title('open circuit voltage(state of charge)');
+% grid on
 
 
 %% FF23MR12W1M1P_B11 data
