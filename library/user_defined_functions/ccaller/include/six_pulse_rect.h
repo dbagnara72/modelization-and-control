@@ -15,12 +15,14 @@ typedef struct sprc_s {
     float ramp_1; float ramp_2; float ramp_3; 
 	float ramp_4; float ramp_5; float ramp_6;  
 	
-	int synch_yA1; int synch_yA2; int synch_yA3; 
-	int synch_yA4; int synch_yA5; int synch_yA6;	
-	int synch_yB1; int synch_yB2; int synch_yB3; 
-	int synch_yB4; int synch_yB5; int synch_yB6;
-	int synch_y1; int synch_y2; int synch_y3;
-	int synch_y4; int synch_y5; int synch_y6;
+	int synch_A1; int synch_A2; int synch_A3; 
+	int synch_A4; int synch_A5; int synch_A6;	
+	
+	int synch_B1; int synch_B2; int synch_B3; 
+	int synch_B4; int synch_B5; int synch_B6;
+
+	int synch_1; int synch_2; int synch_3;
+	int synch_4; int synch_5; int synch_6;
 } sprc_t;
 
 typedef struct spr_p_s {
@@ -30,8 +32,8 @@ typedef struct spr_p_s {
 	int p4;
 	int p5;
 	int p6;
-} twvpr_p_t;
+} spr_p_t;
 
-float sprcProcess(sprc_t *spr, const float wt, const float alpha, const int block, twvpr_p_t *p);
+float sprcProcess(sprc_t *spr, const float wt, const float alpha, const int block, spr_p_t *p);
 
-void sprcProcessSimulink(const float wt, const float alpha, const int block, twvpr_p_t *p);
+void sprcProcessSimulink(const float wt, const float alpha, const int block, spr_p_t *p);

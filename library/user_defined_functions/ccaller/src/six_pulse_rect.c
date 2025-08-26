@@ -3,317 +3,167 @@
 #include "../include/six_pulse_rect.h"
 
 // ------------------------------------------------------------------------------
-float twvprProcess(sprc_t *spr, const float wt, const float alpha, const int block, twvpr_p_t *p)
+float sprcProcess(sprc_t *spr, const float wt, const float alpha, const int block, spr_p_t *p)
 {
 	float phaseshift = 0;
 	
 	phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 5;
-	twvpr->ramp_d_1 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	spr->ramp_1 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 4;
-	twvpr->ramp_d_2 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	spr->ramp_2 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 3;
-	twvpr->ramp_d_3 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	spr->ramp_3 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 2;
-	twvpr->ramp_d_4 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	spr->ramp_4 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3;
-	twvpr->ramp_d_5 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	spr->ramp_5 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_6;
-	twvpr->ramp_d_6 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
-	
-	phaseshift = wt + MATH_PI_3 * 5;
-	twvpr->ramp_y_1 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
-	
-    phaseshift = wt + MATH_PI_3 * 4;
-	twvpr->ramp_y_2 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
-	
-    phaseshift = wt + MATH_PI_3 * 3;
-	twvpr->ramp_y_3 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
-	
-    phaseshift = wt + MATH_PI_3 * 2;
-	twvpr->ramp_y_4 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
-	
-    phaseshift = wt + MATH_PI_3;
-	twvpr->ramp_y_5 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
-	
-    phaseshift = wt;
-	twvpr->ramp_y_6 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	spr->ramp_6 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
 	/* +++++++++++ */
 	
-	if (twvpr->ramp_d_1 >= alpha)
-		twvpr->synch_dA1 = 1;
+	if (spr->ramp_1 >= alpha)
+		spr->synch_A1 = 1;
 	else
-		twvpr->synch_dA1 = 0;
+		spr->synch_A1 = 0;
 	
-	if (twvpr->ramp_d_1 <= twvpr->synch_d1)
-		twvpr->synch_dB1 = 1;
+	if (spr->ramp_1 <= spr->synch_1)
+		spr->synch_B1 = 1;
 	else
-		twvpr->synch_dB1 = 0;
+		spr->synch_B1 = 0;
 
-	if (twvpr->synch_dA1 == 1)
-		twvpr->synch_d1 = alpha + PWIDTH;
+	if (spr->synch_A1 == 1)
+		spr->synch_1 = alpha + PWIDTH;
 	else
-		twvpr->synch_d1 = twvpr->synch_d1 + PWIDTH;
+		spr->synch_1 = spr->synch_1 + PWIDTH;
 		
 	if (!block)
-		pd->pd_1 = twvpr->synch_dA1 * twvpr->synch_dB1;
+		p->p1 = spr->synch_A1 * spr->synch_B1;
 	else
-		pd->pd_1 = 0;
+		p->p1 = 0;
 	
 	/* +++++++++++ */	
 	
-	if (twvpr->ramp_d_2 >= alpha)
-		twvpr->synch_dA2 = 1;
+	if (spr->ramp_2 >= alpha)
+		spr->synch_A2 = 1;
 	else
-		twvpr->synch_dA2 = 0;
+		spr->synch_A2 = 0;
 
-	if (twvpr->ramp_d_2 <= twvpr->synch_d2)
-		twvpr->synch_dB2 = 1;
+	if (spr->ramp_2 <= spr->synch_2)
+		spr->synch_B2 = 1;
 	else
-		twvpr->synch_dB2 = 0;
+		spr->synch_B2 = 0;
 
-	if (twvpr->synch_dA2 == 1)
-		twvpr->synch_d2 = alpha + PWIDTH;
+	if (spr->synch_A2 == 1)
+		spr->synch_2 = alpha + PWIDTH;
 	else
-		twvpr->synch_d2 = twvpr->synch_d2 + PWIDTH;
+		spr->synch_2 = spr->synch_2 + PWIDTH;
 		
 	if (!block)
-		pd->pd_2 = twvpr->synch_dA2 * twvpr->synch_dB2;
+		p->p2 = spr->synch_A2 * spr->synch_B2;
 	else
-		pd->pd_2 = 0;
+		p->p2 = 0;
 	
 	/* +++++++++++ */
 	
-	if (twvpr->ramp_d_3 >= alpha)
-		twvpr->synch_dA3 = 1;
+	if (spr->ramp_3 >= alpha)
+		spr->synch_A3 = 1;
 	else
-		twvpr->synch_dA3 = 0;
+		spr->synch_A3 = 0;
 
-	if (twvpr->ramp_d_3 <= twvpr->synch_d3)
-		twvpr->synch_dB3 = 1;
+	if (spr->ramp_3 <= spr->synch_3)
+		spr->synch_B3 = 1;
 	else
-		twvpr->synch_dB3 = 0;
+		spr->synch_B3 = 0;
 
-	if (twvpr->synch_dA3 == 1)
-		twvpr->synch_d3 = alpha + PWIDTH;
+	if (spr->synch_A3 == 1)
+		spr->synch_3 = alpha + PWIDTH;
 	else
-		twvpr->synch_d3 = twvpr->synch_d3 + PWIDTH;
+		spr->synch_3 = spr->synch_3 + PWIDTH;
 		
 	if (!block)
-		pd->pd_3 = twvpr->synch_dA3 * twvpr->synch_dB3;
+		p->p3 = spr->synch_A3 * spr->synch_B3;
 	else
-		pd->pd_3 = 0;
+		p->p3 = 0;
 
 	/* +++++++++++ */
 
-	if (twvpr->ramp_d_4 >= alpha)
-		twvpr->synch_dA4 = 1;
+	if (spr->ramp_4 >= alpha)
+		spr->synch_A4 = 1;
 	else
-		twvpr->synch_dA4 = 0;
+		spr->synch_A4 = 0;
 
-	if (twvpr->ramp_d_4 <= twvpr->synch_d4)
-		twvpr->synch_dB4 = 1;
+	if (spr->ramp_4 <= spr->synch_4)
+		spr->synch_B4 = 1;
 	else
-		twvpr->synch_dB4 = 0;
+		spr->synch_B4 = 0;
 
-	if (twvpr->synch_dA4 == 1)
-		twvpr->synch_d4 = alpha + PWIDTH;
+	if (spr->synch_A4 == 1)
+		spr->synch_4 = alpha + PWIDTH;
 	else
-		twvpr->synch_d4 = twvpr->synch_d4 + PWIDTH;
+		spr->synch_4 = spr->synch_4 + PWIDTH;
 		
 	if (!block)
-		pd->pd_4 = twvpr->synch_dA4 * twvpr->synch_dB4;
+		p->p4 = spr->synch_A4 * spr->synch_B4;
 	else
-		pd->pd_4 = 0;
+		p->p4 = 0;
 
 	/* +++++++++++ */
 
-	if (twvpr->ramp_d_5 >= alpha)
-		twvpr->synch_dA5 = 1;
+	if (spr->ramp_5 >= alpha)
+		spr->synch_A5 = 1;
 	else
-		twvpr->synch_dA5 = 0;
+		spr->synch_A5 = 0;
 
-	if (twvpr->ramp_d_5 <= twvpr->synch_d5)
-		twvpr->synch_dB5 = 1;
+	if (spr->ramp_5 <= spr->synch_5)
+		spr->synch_B5 = 1;
 	else
-		twvpr->synch_dB5 = 0;
+		spr->synch_B5 = 0;
 
-	if (twvpr->synch_dA5 == 1)
-		twvpr->synch_d5 = alpha + PWIDTH;
+	if (spr->synch_A5 == 1)
+		spr->synch_5 = alpha + PWIDTH;
 	else
-		twvpr->synch_d5 = twvpr->synch_d5 + PWIDTH;
+		spr->synch_5 = spr->synch_5 + PWIDTH;
 		
 	if (!block)
-		pd->pd_5 = twvpr->synch_dA5 * twvpr->synch_dB5;
+		p->p5 = spr->synch_A5 * spr->synch_B5;
 	else
-		pd->pd_5 = 0;
+		p->p5 = 0;
 
 	/* +++++++++++ */
 
-	if (twvpr->ramp_d_6 >= alpha)
-		twvpr->synch_dA6 = 1;
+	if (spr->ramp_6 >= alpha)
+		spr->synch_A6 = 1;
 	else
-		twvpr->synch_dA6 = 0;
+		spr->synch_A6 = 0;
 
-	if (twvpr->ramp_d_6 <= twvpr->synch_d6)
-		twvpr->synch_dB6 = 1;
+	if (spr->ramp_6 <= spr->synch_6)
+		spr->synch_B6 = 1;
 	else
-		twvpr->synch_dB6 = 0;
+		spr->synch_B6 = 0;
 
-	if (twvpr->synch_dA6 == 1)
-		twvpr->synch_d6 = alpha + PWIDTH;
+	if (spr->synch_A6 == 1)
+		spr->synch_6 = alpha + PWIDTH;
 	else
-		twvpr->synch_d6 = twvpr->synch_d6 + PWIDTH;
+		spr->synch_6 = spr->synch_6 + PWIDTH;
 		
 	if (!block)
-		pd->pd_6 = twvpr->synch_dA6 * twvpr->synch_dB6;
+		p->p6 = spr->synch_A6 * spr->synch_B6;
 	else
-		pd->pd_6 = 0;
-	
-	/* +++++++++++ */
-	
-	if (twvpr->ramp_y_1 >= alpha)
-		twvpr->synch_yA1 = 1;
-	else
-		twvpr->synch_yA1 = 0;
-	
-	if (twvpr->ramp_y_1 <= twvpr->synch_y1)
-		twvpr->synch_yB1 = 1;
-	else
-		twvpr->synch_yB1 = 0;
-
-	if (twvpr->synch_yA1 == 1)
-		twvpr->synch_y1 = alpha + PWIDTH;
-	else
-		twvpr->synch_y1 = twvpr->synch_y1 + PWIDTH;
-		
-	if (!block)
-		py->py_1 = twvpr->synch_yA1 * twvpr->synch_yB1;
-	else
-		py->py_1 = 0;
-	
-	/* +++++++++++ */	
-	
-	if (twvpr->ramp_y_2 >= alpha)
-		twvpr->synch_yA2 = 1;
-	else
-		twvpr->synch_yA2 = 0;
-
-	if (twvpr->ramp_y_2 <= twvpr->synch_y2)
-		twvpr->synch_yB2 = 1;
-	else
-		twvpr->synch_yB2 = 0;
-
-	if (twvpr->synch_yA2 == 1)
-		twvpr->synch_y2 = alpha + PWIDTH;
-	else
-		twvpr->synch_y2 = twvpr->synch_y2 + PWIDTH;
-		
-	if (!block)
-		py->py_2 = twvpr->synch_yA2 * twvpr->synch_yB2;
-	else
-		py->py_2 = 0;
-	
-	/* +++++++++++ */
-	
-	if (twvpr->ramp_y_3 >= alpha)
-		twvpr->synch_yA3 = 1;
-	else
-		twvpr->synch_yA3 = 0;
-
-	if (twvpr->ramp_y_3 <= twvpr->synch_y3)
-		twvpr->synch_yB3 = 1;
-	else
-		twvpr->synch_yB3 = 0;
-
-	if (twvpr->synch_yA3 == 1)
-		twvpr->synch_y3 = alpha + PWIDTH;
-	else
-		twvpr->synch_y3 = twvpr->synch_y3 + PWIDTH;
-		
-	if (!block)
-		py->py_3 = twvpr->synch_yA3 * twvpr->synch_yB3;
-	else
-		py->py_3 = 0;
-
-	/* +++++++++++ */
-
-	if (twvpr->ramp_y_4 >= alpha)
-		twvpr->synch_yA4 = 1;
-	else
-		twvpr->synch_yA4 = 0;
-
-	if (twvpr->ramp_y_4 <= twvpr->synch_y4)
-		twvpr->synch_yB4 = 1;
-	else
-		twvpr->synch_yB4 = 0;
-
-	if (twvpr->synch_yA4 == 1)
-		twvpr->synch_y4 = alpha + PWIDTH;
-	else
-		twvpr->synch_y4 = twvpr->synch_y4 + PWIDTH;
-		
-	if (!block)
-		py->py_4 = twvpr->synch_yA4 * twvpr->synch_yB4;
-	else
-		py->py_4 = 0;
-
-	/* +++++++++++ */
-
-	if (twvpr->ramp_y_5 >= alpha)
-		twvpr->synch_yA5 = 1;
-	else
-		twvpr->synch_yA5 = 0;
-
-	if (twvpr->ramp_y_5 <= twvpr->synch_y5)
-		twvpr->synch_yB5 = 1;
-	else
-		twvpr->synch_yB5 = 0;
-
-	if (twvpr->synch_yA5 == 1)
-		twvpr->synch_y5 = alpha + PWIDTH;
-	else
-		twvpr->synch_y5 = twvpr->synch_y5 + PWIDTH;
-		
-	if (!block)
-		py->py_5 = twvpr->synch_yA5 * twvpr->synch_yB5;
-	else
-		py->py_5 = 0;
-
-	/* +++++++++++ */
-
-	if (twvpr->ramp_y_6 >= alpha)
-		twvpr->synch_yA6 = 1;
-	else
-		twvpr->synch_yA6 = 0;
-
-	if (twvpr->ramp_y_6 <= twvpr->synch_y6)
-		twvpr->synch_yB6 = 1;
-	else
-		twvpr->synch_yB6 = 0;
-
-	if (twvpr->synch_yA6 == 1)
-		twvpr->synch_y6 = alpha + PWIDTH;
-	else
-		twvpr->synch_y6 = twvpr->synch_y6 + PWIDTH;
-		
-	if (!block)
-		py->py_6 = twvpr->synch_yA6 * twvpr->synch_yB6;
-	else
-		py->py_6 = 0;
+		p->p6 = 0;
 	
 }
 
-void twvprProcessSimulink(const float wt, const float alpha, const int block, twvpr_p_t *p)
+void sprcProcessSimulink(const float wt, const float alpha, const int block, spr_p_t *p)
 {
-	static TWVPRCTRL twvpr_inst; 
-	static twvpr_p_t p_inst; 
-	twvprProcess(&twvpr_inst, wt, alpha, block, &p_inst);
+	static sprc_t spr_inst; 
+	static spr_p_t p_inst; 
+	sprcProcess(&spr_inst, wt, alpha, block, &p_inst);
 	*p = p_inst;
 }
 
