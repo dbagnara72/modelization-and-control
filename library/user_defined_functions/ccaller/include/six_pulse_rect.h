@@ -1,6 +1,9 @@
 /* six pulses rectifier */
 
 #define MATH_PI_6		0.523598775598299
+#define MATH_5PI_3		5.2360
+#define MATH_4PI_3		4.1888
+#define MATH_2PI_3		2.0944
 #define MATH_PI_3		1.0471975511966
 #define MATH_PI_2		1.5707963267949
 #define MATH_PI			3.14159265358979
