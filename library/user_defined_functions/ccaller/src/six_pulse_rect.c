@@ -7,16 +7,16 @@ float sprcProcess(sprc_t *spr, const float wt, const float alpha, const int bloc
 {
 	float phaseshift = 0;
 	
-	phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 5;
+	phaseshift = wt + MATH_PI_6 + MATH_5PI_3;
 	spr->ramp_1 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI);
 	
-    phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 4;
+    phaseshift = wt + MATH_PI_6 + MATH_4PI_3;
 	spr->ramp_2 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI);
 	
-    phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 3;
+    phaseshift = wt + MATH_PI_6 + MATH_PI;
 	spr->ramp_3 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI);
 	
-    phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 2;
+    phaseshift = wt + MATH_PI_6 + MATH_2PI_3;
 	spr->ramp_4 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI);
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3;
