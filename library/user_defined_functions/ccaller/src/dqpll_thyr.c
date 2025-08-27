@@ -182,7 +182,7 @@ float dqpll_thyr_process(volatile DQPLL_THYR *dqpll_ctrl, volatile float u_phase
 		if ((dqpll_ctrl->omega_hat > OMEGA_HAT_WINDOW2) || (dqpll_ctrl->omega_hat < -OMEGA_HAT_WINDOW2))    // la frequenza stimata deve superare una certa soglia
 			{
 			    if ((omega_i_hat_tilde < param_thyr_rect.pll_lim_ok) && (omega_i_hat_tilde > -param_thyr_rect.pll_lim_ok))
-					{  // se la frequenza ï¿½ nei limiti
+					{  // se la frequenza é nei limiti
 						param_thyr_rect.pll_state = DQPLL_THYR_STATE_RUN; // rimane in run
 						dqpll_ctrl->dqpll_state = DQPLL_THYR_STATE_RUN; // rimane in run
 					}
