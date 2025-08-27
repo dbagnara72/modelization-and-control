@@ -92,10 +92,10 @@ float dqpll_grid_process(volatile DQPLL_GRID *dqpll_ctrl, volatile float u_phase
 		dqpll_ctrl->omega_i_hat = u_grid_eta_n * ki1_dqpll_grid * ts + omega_i_hat;
 		dqpll_ctrl->omega_hat = u_grid_eta_n * kp_dqpll_grid + dqpll_ctrl->omega_i_hat;
 		dqpll_ctrl->gamma_hat = dqpll_ctrl->omega_hat * ki2_dqpll_grid * ts + gamma_hat;
-//		gamma_hat_unbounded = dqpll_ctrl->omega_hat * ki2_dqpll_grid * ts + gamma_hat;
 		
 		// keep estimated phase between PI and -PI
-		if (dqpll_ctrl->gamma_hat > MATH_PI)
+		dqpll_ctrl->gamma_hat = - MATH_PI + fmodf(gamma_hat + MATH_3PI, MATH_2PI);
+		/* if (dqpll_ctrl->gamma_hat > MATH_PI)
 			{
 				while(dqpll_ctrl->gamma_hat > MATH_PI) dqpll_ctrl->gamma_hat -= MATH_2PI;
 			}
@@ -103,8 +103,7 @@ float dqpll_grid_process(volatile DQPLL_GRID *dqpll_ctrl, volatile float u_phase
 			{
 				while(dqpll_ctrl->gamma_hat < -MATH_PI) dqpll_ctrl->gamma_hat += MATH_2PI;
 			}
-			
-//		dqpll_ctrl->gamma_hat = - MATH_PI + fmodf(gamma_hat_unbounded + MATH_3PI, MATH_2PI);
+		*/	
 
 	switch (dqpll_ctrl->dqpll_state)
 	{

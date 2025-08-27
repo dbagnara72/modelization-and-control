@@ -8,40 +8,40 @@ float twvprProcess(TWVPRCTRL *twvpr, const float wt, const float alpha, const in
 	float phaseshift = 0;
 	
 	phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 5;
-	twvpr->ramp_d_1 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_d_1 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 4;
-	twvpr->ramp_d_2 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_d_2 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 3;
-	twvpr->ramp_d_3 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_d_3 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 2;
-	twvpr->ramp_d_4 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_d_4 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3;
-	twvpr->ramp_d_5 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_d_5 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_6;
-	twvpr->ramp_d_6 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_d_6 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
 	phaseshift = wt + MATH_PI_3 * 5;
-	twvpr->ramp_y_1 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_y_1 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_3 * 4;
-	twvpr->ramp_y_2 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_y_2 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_3 * 3;
-	twvpr->ramp_y_3 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_y_3 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_3 * 2;
-	twvpr->ramp_y_4 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_y_4 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt + MATH_PI_3;
-	twvpr->ramp_y_5 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_y_5 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
     phaseshift = wt;
-	twvpr->ramp_y_6 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
+	twvpr->ramp_y_6 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI) * MATH_RAD_DEG;
 	
 	/* +++++++++++ */
 	

@@ -8,22 +8,22 @@ float sprcProcess(sprc_t *spr, const float wt, const float alpha, const int bloc
 	float phaseshift = 0;
 	
 	phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 5;
-	spr->ramp_1 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI);
+	spr->ramp_1 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI);
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 4;
-	spr->ramp_2 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI);
+	spr->ramp_2 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI);
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 3;
-	spr->ramp_3 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI);
+	spr->ramp_3 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI);
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3 * 2;
-	spr->ramp_4 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI);
+	spr->ramp_4 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI);
 	
     phaseshift = wt + MATH_PI_6 + MATH_PI_3;
-	spr->ramp_5 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI);
+	spr->ramp_5 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI);
 	
     phaseshift = wt + MATH_PI_6;
-	spr->ramp_6 = (phaseshift - floor(phaseshift / MATH_2PI) * MATH_2PI);
+	spr->ramp_6 = (phaseshift - floorf(phaseshift / MATH_2PI) * MATH_2PI);
 	
 	/* +++++++++++ */
 	
