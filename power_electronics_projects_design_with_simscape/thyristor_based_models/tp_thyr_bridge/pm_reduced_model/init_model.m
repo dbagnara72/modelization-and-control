@@ -108,7 +108,7 @@ lpf_ss = ss(A,B,C,D);
 lpf_ss_init = [0,50/lpf_ss.c(2)];
 
 % %% 
-model = 'tp_thyr_rect_pm';
+model = 'tp_thyr_rect_pm_rm';
 open_system(model);
 Simulink.importExternalCTypes(model,'Names',{'mavgflt_output_t'});
 Simulink.importExternalCTypes(model,'Names',{'bemf_obsv_output_t'});
