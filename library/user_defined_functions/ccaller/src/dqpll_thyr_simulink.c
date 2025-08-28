@@ -7,9 +7,7 @@ unsigned int dqpll_thyr_ctrl_initialized = 0;
 
 // ------------------------------------------------------------------------------
 DQPLL_THYR_OUTPUT dqpll_thyr_process_simulink(unsigned char reset, const float u_phase_r, const float u_phase_s, 
-		const float u_phase_t, const float ts
-)
-{
+		const float u_phase_t, const float ts) {
 
 	if (!dqpll_thyr_ctrl_initialized) {
 	    dqpll_thyr_init(&dqpll_thyr_ctrl);

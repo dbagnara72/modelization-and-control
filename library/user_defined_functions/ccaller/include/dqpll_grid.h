@@ -15,9 +15,9 @@
 
 #define DQPLL_GRID_DESAT		0.001f
 #define DQPLL_GRID_LIM_OK		0.1f
-#define KP_DQPLL_GRID			0.25f
+#define KP_DQPLL_GRID			1.0f
 #define KI1_DQPLL_GRID			80.0f
-#define OMEGA_GRID_NOM			50.0f
+#define OMEGA_GRID_NOM			314.159f
 #define OMEGA_GRID_NORM_NOM		1.0f
 #define KI2_DQPLL_GRID			314.159f
 #define OMEGA_HAT_WINDOW1		0.95f

@@ -1,4 +1,3 @@
-
 #include <dqpll_grid.h>
 #include <dqpll_grid_simulink.h>
 
@@ -7,9 +6,7 @@ unsigned int dqpll_grid_ctrl_initialized = 0;
 
 // ------------------------------------------------------------------------------
 DQPLL_GRID_OUTPUT dqpll_grid_process_simulink(unsigned char reset, const float u_phase_r, const float u_phase_s, 
-		const float u_phase_t, const float ts
-)
-{
+		const float u_phase_t, const float ts ) {
 
 	if (!dqpll_grid_ctrl_initialized) {
 	    dqpll_grid_init(&dqpll_grid_ctrl);
