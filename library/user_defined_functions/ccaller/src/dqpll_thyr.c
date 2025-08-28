@@ -83,16 +83,7 @@ float dqpll_thyr_process(volatile DQPLL_THYR *dqpll_ctrl, volatile float u_phase
 				
 		/* keep estimated phase between 0 and 2PI (important for thyristor rectifier) */ 
 		dqpll_ctrl->gamma_hat = dqpll_ctrl->gamma_hat - floorf(dqpll_ctrl->gamma_hat / MATH_2PI) * MATH_2PI;
-		/*
-		if (dqpll_ctrl->gamma_hat > MATH_2PI)
-			{
-				while(dqpll_ctrl->gamma_hat > MATH_2PI) dqpll_ctrl->gamma_hat -= MATH_2PI;
-			}
-		else if (dqpll_ctrl->gamma_hat < MATH_NULL)
-			{
-				while(dqpll_ctrl->gamma_hat < MATH_NULL) dqpll_ctrl->gamma_hat += MATH_2PI;
-			}
-		*/
+	
 	switch (dqpll_ctrl->dqpll_state)
 	{
 		case DQPLL_THYR_STATE_STOP:

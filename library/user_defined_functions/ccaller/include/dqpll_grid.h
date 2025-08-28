@@ -1,7 +1,7 @@
 #ifndef _DQPLL_GRID_
 #define _DQPLL_GRID_
 
-//#include <math.h>
+#include <math.h>
 #include <math_f.h>
 
 #define CABCD_STATE_STOP				        0 /* ricevo un comando di stop o un reset dalla stato di fault, eventuale contattore Ã© aperto, INVERTER e ZVS spenti */

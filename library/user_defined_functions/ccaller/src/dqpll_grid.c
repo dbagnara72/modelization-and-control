@@ -63,7 +63,6 @@ float dqpll_grid_process(volatile DQPLL_GRID *dqpll_ctrl, volatile float u_phase
 		u_grid_beta = MATH_1_SQRT3 * (u_phase_s - u_phase_t);
 
 		u_vector_length_inverter = 1.0f / sqrtf(u_grid_alpha * u_grid_alpha + u_grid_beta * u_grid_beta);
-		//u_vector_length = isqrtf(u_grid_alpha * u_grid_alpha + u_grid_beta * u_grid_beta);
 
 		u_grid_xi = u_grid_alpha * th_cos + u_grid_beta * th_sin;
 		u_grid_eta = u_grid_beta * th_cos - u_grid_alpha * th_sin;
@@ -79,31 +78,20 @@ float dqpll_grid_process(volatile DQPLL_GRID *dqpll_ctrl, volatile float u_phase
 
 		u_square_tilde = uxi_tilde * uxi_tilde + ueta_tilde * ueta_tilde;
 		u_tilde = 0.0;
-		if (u_square_tilde > 0.0f)
-			{
+		if (u_square_tilde > 0.0f) {
 				u_tilde = sqrtf(u_square_tilde);
 			}
-		if (ueta_tilde >= 0.0f)
-			{
+		if (ueta_tilde >= 0.0f) {
 				u_tilde *= -1.0f;
 			}
 
 		// calcola frequenza di linea in p.u.
-		dqpll_ctrl->omega_i_hat = u_grid_eta_n * ki1_dqpll_grid * ts + omega_i_hat;
-		dqpll_ctrl->omega_hat = u_grid_eta_n * kp_dqpll_grid + dqpll_ctrl->omega_i_hat;
+		dqpll_ctrl->omega_i_hat = u_tilde * ki1_dqpll_grid * ts + omega_i_hat;
+		dqpll_ctrl->omega_hat = u_tilde * kp_dqpll_grid + dqpll_ctrl->omega_i_hat;
 		dqpll_ctrl->gamma_hat = dqpll_ctrl->omega_hat * ki2_dqpll_grid * ts + gamma_hat;
 		
 		// keep estimated phase between PI and -PI
-		dqpll_ctrl->gamma_hat = - MATH_PI + fmodf(gamma_hat + MATH_3PI, MATH_2PI);
-		/* if (dqpll_ctrl->gamma_hat > MATH_PI)
-			{
-				while(dqpll_ctrl->gamma_hat > MATH_PI) dqpll_ctrl->gamma_hat -= MATH_2PI;
-			}
-		else if (dqpll_ctrl->gamma_hat < -MATH_PI)
-			{
-				while(dqpll_ctrl->gamma_hat < -MATH_PI) dqpll_ctrl->gamma_hat += MATH_2PI;
-			}
-		*/	
+		dqpll_ctrl->gamma_hat = - MATH_PI + fmodf(dqpll_ctrl->gamma_hat + MATH_3PI, MATH_2PI);
 
 	switch (dqpll_ctrl->dqpll_state)
 	{
