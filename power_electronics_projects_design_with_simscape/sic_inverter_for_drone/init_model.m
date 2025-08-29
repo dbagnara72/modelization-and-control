@@ -17,8 +17,8 @@ pwm_out_lim = 1;
 use_cc_ccaller = 1;
 use_cc_simulink = 1 - use_cc_ccaller;
 
-use_observer_with_load_estimator_ccaller = 1;
-use_observer_ccaller = 0;
+use_observer_with_load_estimator_ccaller = 0;
+use_observer_ccaller = 1;
 use_observer_simulink = 0;
 
 use_gyro_model = 0;
@@ -36,7 +36,7 @@ tsample = ts_inv;
 if (use_gyro_model)
 tc = ts_inv/40; % mandatory for stability of the solver
 else
-tc = ts_inv/100; % mandatory for stability of the solver
+tc = ts_inv/200; % mandatory for stability of the solver
 end
 
 t_measure = simlength/20;
