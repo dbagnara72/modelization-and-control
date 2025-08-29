@@ -3,7 +3,7 @@ close all
 clc
 
 %% utility
-fPWM_INV = 8e3*6;
+fPWM_INV = 3.333333e3*6;
 dead_time = 0;
 delayINV_modA = 0;
 
@@ -11,7 +11,7 @@ simlength = 60;
 options = bodeoptions;
 options.FreqUnits = 'Hz';
 tcontrol = 1/fPWM_INV;
-ts = tcontrol;
+ts = tcontrol/50;
 
 t_measure = 1;
 Nc = floor(t_measure/ts);
@@ -36,6 +36,7 @@ Ron = 3e-3;
 Rsnubber = 1e6;
 Csnubber = 1e-12;
 
+open_system("motore_sincrono_mpc_nonlinear_ekf.slx");
 
 
 
