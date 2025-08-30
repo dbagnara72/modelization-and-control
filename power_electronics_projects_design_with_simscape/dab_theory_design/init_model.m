@@ -70,6 +70,8 @@ rlm_trafo = 1e-3;
 Piron = 1250;
 rfe_trafo = v1_trafo^2/Piron;
 lm_trafo = v1_trafo/I0/(2*pi*fn_trafo);
+n1_hf_trafo = 25;
+n2_hf_trafo = n_trafo*n1_hf_trafo;
 
 %% HW components
 
@@ -82,8 +84,8 @@ RCFu_dc_internal = 1e-3;
 
 % LC interno DAB
 m = 1;
-Cs1 = 250e-6;
-Ls1 = 1.5e-6;
+Cs1 = 500e-6;
+Ls1 = 20e-6;
 Cs2 = Cs1/m^2;
 Ls2 = Ls1*m^2;
 
@@ -94,7 +96,8 @@ fres= 1/2/pi/sqrt(Cs1*Ls1)
 fsr = fPWM_DAB/fres
 
 
-CFi_dc = 2*125e-6;
+LFi_dc = 125e-6;
+CFi_dc = 5e-3;
 RCFi_dc_internal = 1e-3;
 
 
@@ -136,7 +139,7 @@ freq = 50;
 delta = 0.02;
 res = 10^(22/20) * s/(s^2 + 4*delta*pi*freq*s + (2*pi*freq)^2);
 resd_tf = c2d(res,ts_dab);
-figure; bode(res,opts); grid on
+% figure; bode(res,opts); grid on
 
 [resn, resd]=tfdata(res,'v');
 [Ares,Bres,Cres,Dres] = tf2ss(resn,resd);
@@ -185,7 +188,7 @@ g1_4Hz = 1 - g0_4Hz;
 
 
 %% Lithium Ion Battery
-number_of_cells = 30; % nominal is 100
+number_of_cells = 200; % nominal is 100
 
 % stato of charge init
 soc_init = 0.85; 
@@ -193,10 +196,10 @@ soc_init = 0.85;
 R = 8.3143;
 F = 96487;
 T = 273.15+40;
-Q = 1000; %Hr*A
+Q = 100; %Hr*A
 
-Vbattery_nom = 110;
-Pbattery_nom = 10e3;
+Vbattery_nom = 450;
+Pbattery_nom = 250e3;
 Ibattery_nom = Pbattery_nom/Vbattery_nom;
 Rmax = Vbattery_nom^2/(Pbattery_nom*0.1);
 Rmin = Vbattery_nom^2/(Pbattery_nom);
@@ -209,8 +212,8 @@ E3 = 0;
 Elog = -0.05;
 alpha = 35;
 
-R0 = 0.0035;
-R1 = 0.0035;
+R0 = 0.035;
+R1 = 0.035;
 C1 = 0.5;
 M = 125;
 
@@ -222,12 +225,12 @@ rKalman = 1;
 Zmodel = (0:1e-3:1);
 ocv_model = E_1*exp(-Zmodel*alpha) + E0 + E1*Zmodel + E2*Zmodel.^2 +...
     E3*Zmodel.^3 + Elog*log(1-Zmodel+ts_dab);
-figure; 
-plot(Zmodel,ocv_model,'LineWidth',2);
-xlabel('state of charge [p.u.]');
-ylabel('open circuit voltage [V]');
-title('open circuit voltage(state of charge)');
-grid on
+% figure; 
+% plot(Zmodel,ocv_model,'LineWidth',2);
+% xlabel('state of charge [p.u.]');
+% ylabel('open circuit voltage [V]');
+% title('open circuit voltage(state of charge)');
+% grid on
 
 Ron = 1e-3; % Rds [Ohm]
 Vgamma = 0.35; % V
@@ -273,6 +276,6 @@ Hs = 1/(s*tau_f+1);
 Hd = c2d(Hs,ts_dab);
 
 
-model = 'battery_dab';
-open_system(model);
+% model = 'battery_dab';
+% open_system(model);
 
