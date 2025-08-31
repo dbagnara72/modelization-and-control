@@ -18,8 +18,7 @@ z=tf('z',tcontrol);
 Tavg_flt = 20e-3;
 
 pmsm_7000Nm1200rpm;
-Assignment3_withDABcomments;
-% kalman_pmsm;
+kalman_pmsm;
 
 %% rotor speed control
 kp_w = 2;
@@ -29,6 +28,8 @@ ki_w = 1;
 w0 = 2*2*pi;
 filter_ref = w0^2/(s^2+2*w0*s+w0^2);
 filterd_ref = c2d(filter_ref,tcontrol);
+
+open_system('pmsm_mpc_ekf');
 
 
 
