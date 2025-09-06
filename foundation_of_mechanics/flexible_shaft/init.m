@@ -8,11 +8,11 @@ options.FreqUnits = 'Hz';
 J1 = 1;
 J2 = 0.68;
 J3 = 1;
-b1 = 0.0;
-b2 = 0.0;
-b3 = 0.0;
+b1 = 0.1;
+b2 = 0.1;
+b3 = 0.1;
 b_theta = 0;
-k_theta = 1e3;
+k_theta = 2e1;
 
 f0_msm = 1/2/pi*sqrt(k_theta*(J1+J2)/(J1*J2))
 
@@ -25,7 +25,7 @@ f1_msmsm = 1/2/pi/sqrt(2)/J1/J2/J3*sqrt(-J1^2*J2^2*J3*k_theta - 2*J1^2*J2*J3^2*k
 Ts = 1/1e3;
 Tcontrol=Ts;
 Tc = Ts;
-simlength = 100;
+simlength = 30;
 Nc=floor(simlength/Tc);
 load_torque = 10;
 
