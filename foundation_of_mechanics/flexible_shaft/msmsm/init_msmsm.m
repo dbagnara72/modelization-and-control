@@ -47,8 +47,6 @@ Q=[Ts 0 0 0 0; 0 Ts 0 0 0; 0 0 Ts 0 0; ...
 R=Ts;
 K = lqr(A,B,Q,R)
 
-%% ISF + SOBS control design in d.t.d.
-
 
 
 
