@@ -6,8 +6,10 @@ beep off
 opts = bodeoptions('cstprefs');
 opts.FreqUnits = 'Hz';
 
+kp_dudc = -0.1;
+
 %% pwm
-fPWM_INV = 4e3; % PWM frequency 
+fPWM_INV = 5e3; % PWM frequency 
 tPWM_INV = 1/fPWM_INV;
 fPWM_ZVS = fPWM_INV; % PWM frequency 
 tPWM_ZVS = 1/fPWM_ZVS;
