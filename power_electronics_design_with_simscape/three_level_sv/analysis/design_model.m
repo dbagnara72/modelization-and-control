@@ -7,7 +7,7 @@ opts = bodeoptions('cstprefs');
 opts.FreqUnits = 'Hz';
 
 %% pwm
-fPWM_INV = 5e3; % PWM frequency 
+fPWM_INV = 4e3; % PWM frequency 
 tPWM_INV = 1/fPWM_INV;
 fPWM_ZVS = fPWM_INV; % PWM frequency 
 tPWM_ZVS = 1/fPWM_ZVS;
@@ -16,9 +16,9 @@ half_phase_pulses = fclock/fPWM_ZVS/2;
 
 %% sampling time
 s=tf('s');
-ts_inv = tPWM_INV; % Sampling time of the control 
+ts_inv = tPWM_INV/2; % Sampling time of the control 
 z_inv=tf('z',ts_inv);
-ts_zvs = tPWM_ZVS*2; % Sampling time of the control 
+ts_zvs = tPWM_ZVS/2; % Sampling time of the control 
 z_zvs=tf('z',ts_zvs);
 % dead_time = 3e-6;
 dead_time = 0;
@@ -230,7 +230,7 @@ flt_dq_d = c2d(flt_dq,ts_inv);
 
 
 %% Lithium Ion Battery
-number_of_cells = 30; % nominal is 100
+number_of_cells = 265; % nominal is 100
 
 % stato of charge init
 soc_init = 0.85; 
@@ -239,13 +239,6 @@ R = 8.3143;
 F = 96487;
 T = 273.15+40;
 Q = 1000; %Hr*A
-
-Vbattery_nom = 110;
-Pbattery_nom = 10e3;
-Ibattery_nom = Pbattery_nom/Vbattery_nom;
-Rmax = Vbattery_nom^2/(Pbattery_nom*0.1);
-Rmin = Vbattery_nom^2/(Pbattery_nom);
-
 E_1 = -1.031;
 % E0 = 3.685;
 E0 = 3.485;
@@ -255,13 +248,20 @@ E2 = 0;
 E3 = 0;
 Elog = -0.05;
 alpha = 35;
-
 R0 = 0.0035;
 R1 = 0.0035;
 % R0 = 0.15;
 % R1 = 0.15;
 C1 = 0.5;
 M = 125;
+
+Vbattery_nom = number_of_cells*(E0+E1);
+Pbattery_nom = 250e3;
+Ibattery_nom = Pbattery_nom/Vbattery_nom;
+Rmax = Vbattery_nom^2/(Pbattery_nom*0.1);
+Rmin = Vbattery_nom^2/(Pbattery_nom);
+
+
 
 
 q1Kalman = ts_inv^2;
